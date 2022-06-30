@@ -12,7 +12,7 @@ const app = express();
 const _ = require("lodash");
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost:27017/blogpostDB")
+mongoose.connect("mongodb+srv://Shivam4598:Shivam4598@cluster0.ydxlp.mongodb.net/blogs", {useNewUrlParser: true});
 
 const postsSchema = {
   head: String,
@@ -23,6 +23,7 @@ const Post = mongoose.model("Post", postsSchema);
 
 const Home = new Post({
   head: "Home",
+  
   content: homeStartingContent
 })
 
@@ -75,7 +76,6 @@ app.get("/compose",function(req, res){
 })
 
 app.post("/compose",function(req, res){
-  console.log("Compose called ");
   const post = new Post({
     head: req.body.postTitle,
     content: req.body.postBody,
@@ -109,7 +109,6 @@ app.get("/contact",function(req, res){
 })
 
 app.get("/",function(req ,res){
-  console.log(posts)
   res.render("home",{home_content : homeStartingContent, scripts: posts});
   // Post.findOne({head: 'Home'},function(err, foundPost){
   //   if(err){
@@ -124,6 +123,6 @@ app.get("/",function(req ,res){
 
 
 
-app.listen(3000, function() {
+app.listen(process.env.PORT, function() {
   console.log("Server started on port 3000");
 });
