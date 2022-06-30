@@ -26,10 +26,12 @@ const Home = new Post({
   content: homeStartingContent
 })
 
+
 const About = new Post({
   head: "About",
   content: aboutContent
 })
+
 
 const Contact = new Post({
   head: "Contact",
@@ -73,6 +75,7 @@ app.get("/compose",function(req, res){
 })
 
 app.post("/compose",function(req, res){
+  console.log("Compose called ");
   const post = new Post({
     head: req.body.postTitle,
     content: req.body.postBody,
@@ -106,6 +109,7 @@ app.get("/contact",function(req, res){
 })
 
 app.get("/",function(req ,res){
+  console.log(posts)
   res.render("home",{home_content : homeStartingContent, scripts: posts});
   // Post.findOne({head: 'Home'},function(err, foundPost){
   //   if(err){

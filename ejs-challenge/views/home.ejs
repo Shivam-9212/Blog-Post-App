@@ -2,23 +2,15 @@
    <h1>Home</h1>
    <p><%=home_content%></p>
    <%scripts.forEach(function(element){%>
-      <%if(element.content.length > 300){%>
         <h1><%=element.head%></h1>
-        <p><%=(element.content).substring(0,400)+"..."%><a href="/posts/<%=(element.head).toLowerCase()%>">[Read More]</a></p
-      <%}else{%>
-        <h1><%=element.head%></h1>
-        <p><%=(element.content)%></p>
-      <%}%>
+        <%if(element.content.length <= 300){%>
+          <p><%=(element.content)%></p>
+        <%}else{%>
+        <p><%=(element.content).substring(0,400)+"..."%><a href="/posts/<%=(element.head).toLowerCase()%>">[Read More]</a></p>
+        <%}%>
    <%})%>
-   <form action="compose" method="get">
-     <button type="submit" class="btn btn-outline-secondary"><b>+</b> Create</button>
-   </form>
+      <p><a href="compose" class="btn btn-outline"><b>+</b> Create</a></p>
   </div>
-  <footer>
-    <div class="footer-padding">
-      <div class="footer">
-        <p>Made by Chandan Pathak</p>
-      </div>
-    </div>
-  </footer>
+  <%- include('partials/footer'); -%>
+  </body>
 </html>
